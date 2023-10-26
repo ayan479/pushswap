@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:51:13 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/25 13:40:57 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/26 18:57:11 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	sortfive(t_stk *a, t_stk *b)
 			rra(a);
 		else
 			ra(a);
-		is_sorted(a);
+		if (is_sorted(a) == 1)
+			free_and_exit_with_msg(a, b, NULL);
 	}
 	pb(a, b);
 	sortfour(a, b);

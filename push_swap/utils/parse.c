@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:15:58 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/25 15:44:39 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/26 18:56:25 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_sorted(t_stk *a)
 	i = 0;
 	while (i < a->top)
 	{
-		if (a->data[i] > a->data[i + 1])
+		if (a->data[i] < a->data[i + 1])
 			return (0);
 		i++;
 	}
@@ -39,7 +39,7 @@ void	has_duplicates(t_stk *a, t_stk *b)
 		{
 			if (a->data[i] == a->data[j])
 			{
-				free_and_exit_with_msg(a, b, "Error Duplicate\n");
+				free_and_exit_with_msg(a, b, "ErrorD\n");
 			}
 			j++;
 		}
@@ -81,8 +81,7 @@ void	sort(t_stk *a, t_stk *b)
 {
 	if (a->top == 0)
 	{
-		ft_printf("Stack has only one number, already sorted\n");
-		exit(EXIT_FAILURE);
+		free_and_exit_with_msg(a, b, NULL);
 	}
 	else if (a->top == 1)
 	{
@@ -95,6 +94,6 @@ void	sort(t_stk *a, t_stk *b)
 		sortfour(a, b);
 	else if (a->top == 4)
 		sortfive(a, b);
-	else if (a->top > 4)
+	else
 		radix(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:11:47 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/12 15:19:49 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/25 22:11:12 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 
 void	pb(t_stk *a, t_stk *b)
 {
-	int	temp;
-
-	if (a->top == -1)
-		return ;
-	temp = a->data[a->top];
-	a->data[a->top] = 0;
+	b->data[++b->top] = a->data[a->top];
 	a->top--;
-	b->top++;
-	b->data[b->top] = temp;
-	ft_printf("%s", "pb\n");
+	ft_printf("pb\n");
 }

@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:50:09 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/12 19:10:46 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/25 22:15:01 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@ void	ra(t_stk *a)
 {
 	int	i;
 	int	temp;
+	int	repp;
+	int	top;
 
-	if (a->top > 0)
+	i = 0;
+	top = a->top;
+	repp = a->data[top];
+	while (i < top)
 	{
-		i = a->top;
-		temp = a->data[a->top];
-		while (i > 0)
-		{
-			a->data[i] = a->data[i - 1];
-			i--;
-		}
-		a->data[0] = temp;
-		ft_printf("%s", "ra\n");
+		if (i == 0)
+			temp = a->data[i];
+		swap(&temp, &a->data[i + 1]);
+		i++;
 	}
+	a->data[0] = repp;
+	ft_printf("ra\n");
 }
 
 /*The function first checks if the stack `a`

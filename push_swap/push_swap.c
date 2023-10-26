@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:16:02 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/25 16:14:29 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/26 18:46:41 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	free_and_exit_with_msg(t_stk *a, t_stk *b, char *msg)
 {
-	if (msg)
-		printf("%s", msg);
-	if (a != NULL)
-		free(a->data);
-	if (b != NULL)
-		free(b->data);
-	if (a != NULL)
-		free(a);
-	if (b != NULL)
-		free(b);
+	if (msg != NULL)
+		ft_printf("%s", msg);
+	if (a != NULL || b != NULL)
+	{
+		if (a != NULL)
+			free(a->data);
+		if (b != NULL)
+			free(b->data);
+	}
 	exit(1);
 }
 
@@ -44,7 +43,7 @@ void	parsearg(t_stk *a, t_stk *b, char *av)
 	top = a->top;
 	i = -1;
 	while (new_av[++i] && top >= 0)
-		a->data[top--] = ft_atoi(new_av[i]);
+		a->data[top--] = ft_atol(new_av[i], new_av, a, b);
 	free_split(new_av);
 }
 
@@ -72,28 +71,6 @@ char	*argconc(int ac, char **av)
 	return (result);
 }
 
-// void	print_stack(t_stk *a)
-// {
-// 	int	i;
-
-// 	i = a->top;
-// 	while (i >= 0)
-// 	{
-// 		if (i == a->top)
-// 		{
-// 			ft_printf("%s", "\n");
-// 			ft_printf("\033[1;31m%d\033[0m ", a->data[i]);
-// 			ft_printf("%s", "\n");
-// 		}
-// 		else
-// 		{
-// 			ft_printf("\033[1;32m%d\033[0m ", a->data[i]);
-// 			ft_printf("%s", "\n");
-// 		}
-// 		i--;
-// 	}
-// 	ft_printf("\n");
-// }
 
 int	main(int ac, char **av)
 {
@@ -105,13 +82,12 @@ int	main(int ac, char **av)
 		ft_printf("%s", "not enough arguments");
 	args = argconc(ac, av);
 	parsearg(&a, &b, args);
-	if (args != NULL)
-		free(args);
 	// ft_printf("top index: %d\n", a.top);
 	// ft_printf("top number: %d\n", a.data[a.top]);
 	// ft_printf("Stack a before sorting: ");
 	// print_stack(&a);
-	is_sorted(&a);
+	if (is_sorted(&a) == 1)
+		free_and_exit_with_msg(&a, &b, NULL);
 	has_duplicates(&a, &b);
 	indexer(&a, &b);
 	// ft_printf("Stack after index: ");
@@ -119,9 +95,10 @@ int	main(int ac, char **av)
 	sort(&a, &b);
 	// ft_printf("Stack a after sorting: ");
 	// print_stack(&a);
+	// print_stack(&b);
 	if (is_sorted(&a))
-		free_and_exit_with_msg(&a, &b, "Sorted");
-	free_and_exit_with_msg(&a, &b, NULL);
+		free_and_exit_with_msg(&a, &b, NULL);
+	free_and_exit_with_msg(&a, &b, "Error\n");
 	return (0);
 }
 

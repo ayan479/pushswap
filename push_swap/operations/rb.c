@@ -6,7 +6,7 @@
 /*   By: mayan <mayan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:50:06 by mayan             #+#    #+#             */
-/*   Updated: 2023/10/12 15:20:05 by mayan            ###   ########.fr       */
+/*   Updated: 2023/10/25 22:14:51 by mayan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ void	rb(t_stk *b)
 {
 	int	i;
 	int	temp;
+	int	repp;
+	int	top;
 
-	if (b->top > 0)
+	i = 0;
+	top = b->top;
+	repp = b->data[top];
+	while (i < top)
 	{
-		i = 0;
-		temp = b->data[0];
-		while (i < b->top)
-		{
-			b->data[i] = b->data[i + 1];
-			i++;
-		}
-		b->data[i] = temp;
-		ft_printf("%s", "rb\n");
+		if (i == 0)
+			temp = b->data[i];
+		swap(&temp, &b->data[i + 1]);
+		i++;
 	}
+	b->data[0] = repp;
+	ft_printf("rb\n");
 }
